@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Bubble Chart</title>
+</head>
+<body>
+    <canvas id="myChart" width="800" height="400"></canvas>
+    <button id="button">Transition</button>
+    <script src="./js/chart.js"></script>
+    <script>
+        var excelData = [
+            {
+                "year": 2001,
+                "Rural": {
+                    x: 9.1,
+                    y: 44,
+                    r: 71.7
+                },
+                "Urban": {
+                    x: 6.3,
+                    y: 24.9,
+                    r: 42.4
+                },
+                "Total": {
+                    x: 8.4,
+                    y: 40.2,
+                    r: 65.9
+                }
+            }, {
+                "year": 2002,
+                "Rural": {
+                    x: 8.7,
+                    y: 44,
+                    r: 69
+                },
+                "Urban": {
+                    x: 6.1,
+                    y: 24,
+                    r: 40
+                },
+                "Total": {
+                    x: 8.1,
+                    y: 40,
+                    r: 63
+                }
+            }, {
+                "year": 2003,
+                "Rural": {
+                    x: 8.7,
+                    y: 41,
+                    r: 66
+                },
+                "Urban": {
+                    x: 6,
+                    y: 22,
+                    r: 38
+                },
+                "Total": {
+                    x: 8,
+                    y: 37,
+                    r: 60
+                }
+            }, {
+                "year": 2004,
+                "Rural": {
+                    x: 8.2,
+                    y: 41,
+                    r: 64
+                },
+                "Urban": {
+                    x: 5.8,
+                    y: 24,
+                    r: 40
+                },
+                "Total": {
+                    x: 7.5,
+                    y: 37,
+                    r: 58
+                }
+            }
+        ]
+    </script>
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart;
+        var timerId;
+        var i = 1;
+        var data = {
+            datasets: [{
+                label: "Rural",
+                backgroundColor:"#ff6384",
+                hoverBackgroundColor: "#ff6384",
+                data: [
+                    {
+                        x: 8.2,
+                        y: 41,
+                        r: 64
+                    }
+                ]
+            }, {
+                label: "Urban",
+                backgroundColor:"#ffbb84",
+                hoverBackgroundColor: "#ffcc84",
+                data: [
+                    {
+                        x: 5.8,
+                        y: 24,
+                        r: 40
+                    }
+                ]
+            }, {
+                label: "Total",
+                backgroundColor:"#ab6384",
+                hoverBackgroundColor: "#ac6384",
+                data: [
+                    {
+                        x: 7.5,
+                        y: 37,
+                        r: 58
+                    }
+                ]
+            }]
+        };
+        function renderChart(ctx, data, xMax, yMax) {
+            myChart = new Chart(ctx, {
+                type: 'bubble',
+                data: data,
+                options: {
+                    tooltips: true,
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                suggestedMax: yMax
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                suggestedMax: xMax
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            if(i >= excelData.length) {
+                i = 1;
+                clearInterval(timerId);
+            } else {
+                var dataToUpdate = excelData[i];
+                console.log(dataToUpdate);
+                myChart.data.datasets.forEach(function(dataset) {
+                    dataset.data = dataToUpdate[dataset.label];
+                });
+                i += 1;
+                console.log(myChart.data.datasets);
+                //myChart.update();
+            }
+        }
+
+        renderChart(ctx, data, 12, 50);
+
+        timerId = setInterval(updateChart, 1000);
+    </script>
+</body>
+</html>
