@@ -49,35 +49,35 @@
             }, {
                 "year": 2003,
                 "Rural": [{
-                    x: 8.7,
-                    y: 41,
+                    x: 2.7,
+                    y: 10,
                     r: 66
                 }],
                 "Urban": [{
-                    x: 6,
-                    y: 22,
+                    x: 4,
+                    y: 42,
                     r: 38
                 }],
                 "Total": [{
-                    x: 8,
-                    y: 37,
+                    x: 9,
+                    y: 27,
                     r: 60
                 }]
             }, {
                 "year": 2004,
                 "Rural": [{
-                    x: 8.1,
-                    y: 41,
+                    x: 1,
+                    y: 17,
                     r: 64
                 }],
                 "Urban": [{
-                    x: 6,
-                    y: 23,
+                    x: 3,
+                    y: 56,
                     r: 40
                 }],
                 "Total": [{
-                    x: 7.6,
-                    y: 37,
+                    x: 2.8,
+                    y: 30,
                     r: 28
                 }]
             }, {
@@ -101,18 +101,18 @@
             {
                 "year": 2006,
                 "Rural": [{
-                    x: 8.2,
-                    y: 41,
+                    x: 6.5,
+                    y: 50,
                     r: 64
                 }],
                 "Urban": [{
-                    x: 5.8,
-                    y: 24,
+                    x: 2.8,
+                    y: 10,
                     r: 40
                 }],
                 "Total": [{
-                    x: 7.5,
-                    y: 37,
+                    x: 3.2,
+                    y: 25,
                     r: 58
                 }]
             }
@@ -128,7 +128,8 @@
             datasets: [{
                 label: "Rural",
                 backgroundColor:"#ff6384",
-                hoverBackgroundColor: "#ff6384",
+                hoverBackgroundColor: "#ff6381",
+                hoverBorderColor: "#ff6384",
                 data: [
                     {
                         x: 8.2,
@@ -139,7 +140,8 @@
             }, {
                 label: "Urban",
                 backgroundColor:"#ffbb84",
-                hoverBackgroundColor: "#ffcc84",
+                hoverBackgroundColor: "#ffcc81",
+                hoverBorderColor: "#ffcc84",
                 data: [
                     {
                         x: 5.8,
@@ -150,7 +152,8 @@
             }, {
                 label: "Total",
                 backgroundColor:"#ab6384",
-                hoverBackgroundColor: "#ac6384",
+                hoverBackgroundColor: "#ac6381",
+                hoverBorderColor: "#ac6384",
                 data: [
                     {
                         x: 7.5,
@@ -173,12 +176,24 @@
                             ticks: {
                                 beginAtZero: true,
                                 suggestedMax: yMax
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: "Y-Axes",
+                                fontSize: 20,
+                                fontColor: "acbf84"
                             }
                         }],
                         xAxes: [{
                             ticks: {
                                 beginAtZero: true,
                                 suggestedMax: xMax
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: "X-Axes",
+                                fontSize: 20,
+                                fontColor: "fa3d84"
                             }
                         }]
                     }
@@ -204,7 +219,7 @@
             timerId = setInterval(updateChart, 1000);
         }
 
-        renderChart(ctx, data, 12, 50);
+        renderChart(ctx, data, 12, 60);
 
         button.onclick = function() {
             transitionHandler();
