@@ -14,72 +14,107 @@
         var excelData = [
             {
                 "year": 2001,
-                "Rural": {
+                "Rural": [{
                     x: 9.1,
                     y: 44,
                     r: 71.7
-                },
-                "Urban": {
+                }],
+                "Urban": [{
                     x: 6.3,
                     y: 24.9,
                     r: 42.4
-                },
-                "Total": {
+                }],
+                "Total": [{
                     x: 8.4,
                     y: 40.2,
                     r: 65.9
-                }
+                }]
             }, {
                 "year": 2002,
-                "Rural": {
+                "Rural": [{
                     x: 8.7,
                     y: 44,
                     r: 69
-                },
-                "Urban": {
+                }],
+                "Urban": [{
                     x: 6.1,
                     y: 24,
                     r: 40
-                },
-                "Total": {
+                }],
+                "Total": [{
                     x: 8.1,
                     y: 40,
                     r: 63
-                }
+                }]
             }, {
                 "year": 2003,
-                "Rural": {
+                "Rural": [{
                     x: 8.7,
                     y: 41,
                     r: 66
-                },
-                "Urban": {
+                }],
+                "Urban": [{
                     x: 6,
                     y: 22,
                     r: 38
-                },
-                "Total": {
+                }],
+                "Total": [{
                     x: 8,
                     y: 37,
                     r: 60
-                }
+                }]
             }, {
                 "year": 2004,
-                "Rural": {
+                "Rural": [{
+                    x: 8.1,
+                    y: 41,
+                    r: 64
+                }],
+                "Urban": [{
+                    x: 6,
+                    y: 23,
+                    r: 40
+                }],
+                "Total": [{
+                    x: 7.6,
+                    y: 37,
+                    r: 28
+                }]
+            }, {
+                "year": 2005,
+                "Rural": [{
+                    x: 8.1,
+                    y: 21,
+                    r: 68
+                }],
+                "Urban": [{
+                    x: 3.5,
+                    y: 29,
+                    r: 15
+                }],
+                "Total": [{
+                    x: 11,
+                    y: 32,
+                    r: 58
+                }]
+            },
+            {
+                "year": 2006,
+                "Rural": [{
                     x: 8.2,
                     y: 41,
                     r: 64
-                },
-                "Urban": {
+                }],
+                "Urban": [{
                     x: 5.8,
                     y: 24,
                     r: 40
-                },
-                "Total": {
+                }],
+                "Total": [{
                     x: 7.5,
                     y: 37,
                     r: 58
-                }
+                }]
             }
         ]
     </script>
@@ -87,6 +122,7 @@
         var ctx = document.getElementById('myChart');
         var myChart;
         var timerId;
+        var button = document.getElementById('button')
         var i = 1;
         var data = {
             datasets: [{
@@ -124,6 +160,7 @@
                 ]
             }]
         };
+
         function renderChart(ctx, data, xMax, yMax) {
             myChart = new Chart(ctx, {
                 type: 'bubble',
@@ -155,19 +192,23 @@
                 clearInterval(timerId);
             } else {
                 var dataToUpdate = excelData[i];
-                console.log(dataToUpdate);
                 myChart.data.datasets.forEach(function(dataset) {
                     dataset.data = dataToUpdate[dataset.label];
                 });
                 i += 1;
-                console.log(myChart.data.datasets);
-                //myChart.update();
+                myChart.update();
             }
+        }
+
+        function transitionHandler() {
+            timerId = setInterval(updateChart, 1000);
         }
 
         renderChart(ctx, data, 12, 50);
 
-        timerId = setInterval(updateChart, 1000);
+        button.onclick = function() {
+            transitionHandler();
+        };
     </script>
 </body>
 </html>
